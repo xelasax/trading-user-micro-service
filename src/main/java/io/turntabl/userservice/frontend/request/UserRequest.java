@@ -11,4 +11,5 @@ public class UserRequest {
     private String id;
     private String email;
     private String fullName;
+    private String authToken;
 }

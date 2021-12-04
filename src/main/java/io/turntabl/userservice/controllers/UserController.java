@@ -29,7 +29,8 @@ public class UserController {
                         new UserRequest(
                                 principal.getSubject(),
                                 principal.getClaims().get("email").toString(),
-                                principal.getClaims().get("name").toString()
+                                principal.getClaims().get("name").toString(),
+                                principal.getTokenValue()
                         )
                 )
         );
