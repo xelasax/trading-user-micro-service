@@ -11,6 +11,4 @@ public interface UserService {
     UserDto getUser(String userId);
 
     List<UserDto> getAllUsers();
-
-    OrderValidationDto validateBuyOrder(OrderValidationDto fromRequest);
 }

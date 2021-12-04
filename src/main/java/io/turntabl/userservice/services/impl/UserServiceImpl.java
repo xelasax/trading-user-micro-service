@@ -52,9 +52,4 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream().map(UserDto::fromEntity).collect(Collectors.toList());
     }
-
-    @Override
-    public OrderValidationDto validateBuyOrder(OrderValidationDto fromRequest) {
-        return null;
-    }
 }

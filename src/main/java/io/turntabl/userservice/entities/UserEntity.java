@@ -16,13 +16,6 @@ public class UserEntity {
     private String email;
     private String fullName;
     private String status;
-
-
-    public static UserEntity fromDTO(UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.id = userDto.getId();
-        userEntity.email = userEntity.getEmail();
-        userEntity.fullName = userEntity.getFullName();
-        return userEntity;
-    }
+    private double balance;
+    private List<PortfolioItem> portfolio = new ArrayList<>();
 }
