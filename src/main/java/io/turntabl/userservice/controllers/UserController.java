@@ -22,6 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
+    @CrossOrigin
     @PostMapping("/api/v1/user")
     public UserResponse createUser(@AuthenticationPrincipal Jwt principal) {
         UserDto userDto = userService.updateUser(
