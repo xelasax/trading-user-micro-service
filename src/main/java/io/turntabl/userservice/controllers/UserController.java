@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @CrossOrigin
     @PostMapping("/api/v1/user")
     public UserResponse createUser(@AuthenticationPrincipal Jwt principal) {
         UserDto userDto = userService.updateUser(
