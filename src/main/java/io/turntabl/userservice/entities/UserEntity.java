@@ -16,6 +16,4 @@ public class UserEntity {
     private String email;
     private String fullName;
     private String status;
-    private double balance;
-    private List<PortfolioItem> portfolio = new ArrayList<>();
 }

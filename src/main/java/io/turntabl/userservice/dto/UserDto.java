@@ -17,8 +17,6 @@ public class UserDto implements Serializable {
     private String fullName;
     private String status;
     private String authToken;
-    private double balance;
-    private List<PortfolioItem> portfolio;
 
     public static UserDto fromUserRequest(UserRequest userRequest) {
         UserDto userDto = new UserDto();
@@ -35,8 +33,6 @@ public class UserDto implements Serializable {
         userDto.email = save.getEmail();
         userDto.fullName = save.getFullName();
         userDto.status = save.getStatus();
-        userDto.balance = save.getBalance();
-        userDto.portfolio = save.getPortfolio();
         return userDto;
     }
 }
