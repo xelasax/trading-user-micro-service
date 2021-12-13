@@ -42,7 +42,7 @@ public class UserController {
 
     @GetMapping("/api/v1/user")
     public UserResponse getUser(@AuthenticationPrincipal Jwt principal) {
-        UserDto userDto = userService.getUser(principal.getSubject());
+        UserDto userDto = userService.getUser(principal);
         return UserResponse.fromDTO(userDto);
     }
 
