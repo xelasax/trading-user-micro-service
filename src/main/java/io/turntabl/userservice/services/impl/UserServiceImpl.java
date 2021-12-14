@@ -10,6 +10,7 @@ import io.turntabl.userservice.repository.UserRepository;
 import io.turntabl.userservice.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private final OrderFeignClient orderFeignClient;
 
     @Override
-    public UserDto updateUser(UserDto userDto) {
+    public UserDto  updateUser(UserDto userDto) {
 //        Optional<UserEntity> userEntity = userRepository.findById(userDto.getId());
         UserEntity userEntity = userRepository.findById(userDto.getId()).orElse(new UserEntity());
         userEntity.setId(userDto.getId());
@@ -43,13 +44,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(String userId) {
-        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id " + userId + " does not exist"));
+    public UserDto getUser(Jwt principal) {
+        UserEntity userEntity = userRepository.findById(principal.getSubject()).orElseThrow(() -> new UserNotFoundException("User with id " + principal.getSubject() + " does not exist"));
+
+        // CREATE WALLET IF IT DOES NOT EXIST OR GET EXISTING USER WALLET
+        WalletInformation walletInformation = orderFeignClient.walletInformation("Bearer "+ principal.getTokenValue());
+        userEntity.setBalance(walletInformation.getBalance());
+        userEntity.setPortfolio(walletInformation.getPortfolios());
+
         return UserDto.fromEntity(userEntity);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream().map(UserDto::fromEntity).collect(Collectors.toList());
+//        return userRepository.findAll().stream().map()
     }
 }
