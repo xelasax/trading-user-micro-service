@@ -47,8 +47,8 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/user/all")
-    public List<UserResponse> getAllUsers() {
-        return userService.getAllUsers().stream().map(UserResponse::fromDTO).collect(Collectors.toList());
+    public List<UserDto> getAllUsers() {
+        return userService.getAllUsers();
     }
 
 }
